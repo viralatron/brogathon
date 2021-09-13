@@ -1,13 +1,65 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,600;1,300;1,600&display=swap');
+
+* {
+    box-sizing: border-box;
+    --color: #e1e1e1;
+    --bg-color: #1e1e1e;
+    font-family: "Rubik", sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+    width: 100%;
+    min-height: 100vh;
+    color: var(--color);
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.valid-keys {
+    font-size: 10rem;
+    font-weight: bold;
+    min-width: 40vw;
+    border-bottom: solid 2px var(--color);
+}
+.matched {
+    background-color: var(--color);
+    color: var(--bg-color);
+    font-style: italic;
+}
+.remainder {
+    opacity: .5;
+}
+.typed-keys {
+    margin-top: 4vh;
+    font-size: 1.3rem;
+    width: 40vw;
+    overflow: hidden;
+}
+
+.completed-words {
+    font-size: 1.2rem;
+    line-height: 2.5rem;
+    padding-right: 1vw;
+    text-align: left;
+    width: max-content;
+    height: 100vh;
+    overflow-y: scroll;
+    position: fixed;
+    top: 0;
+    right: 0;
+    opacity: .8;
 }
