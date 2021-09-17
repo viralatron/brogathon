@@ -15,6 +15,7 @@ const getWord = () => {
 const App = () => {
     const [typedKeys, setTypedKeys] = useState([]);
     const [validKeys, setValidKeys] = useState([]);
+    const [completedWords, setCompletedWords] = useState([]);
     const [word, setWord] = useState('');
 
     const isValidKey = (key, word) => {
@@ -35,18 +36,32 @@ const App = () => {
             
             setValidKeys((prev) => {
                 const isValidLenth = prev.length <= word.length;
-                const isNextChar = isValidLenth && word[prev.length] == key;
+                const isNextChar = isValidLenth && word[prev.length] === key;
                 
                 return (isNextChar) ? [...prev, key] : prev;
             });
         }
         
-        console.log('key', key);
     };
 
     useEffect(() => {
         setWord(getWord());
     }, []);
+
+    useEffect(( ) => {
+        const wordFromValidkeys = validKeys.join('').toLowerCase();
+
+        if(word && word === wordFromValidkeys){
+            let newWord = null
+            do {
+                newWord = getWord();
+            } while (completedWords.includes(newWord));
+
+            setWord(newWord);
+            setValidKeys([]);
+            setCompletedWords((prev) => [...prev, word]);
+        }
+    }, [word, validKeys, completedWords]);
 
     return(
         <div className="container" tabIndex="0" onKeyDown={handleKeyDown}>
@@ -56,9 +71,9 @@ const App = () => {
             <div className="typed-keys">{ typedKeys ? typedKeys.join(' ') : null}</div>
             <div className="completed-words">
                 <ol>
-                    <li>alface</li>
-                    <li>twitter</li>
-                    <li>profissional</li>
+                    {completedWords.map((word) => (
+                    <li key={word}>{word}</li>
+                    ))}
                 </ol>
             </div>
         </div>
